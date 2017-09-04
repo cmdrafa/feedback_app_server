@@ -1,10 +1,11 @@
+// Required Module
 const express = require('express');
-
+// Required services
+require('./services/passport');
+// Binding express to 'app'
 const app = express();
-
-app.get('/', (req, res) => {
-    res.send({ bye: 'there' });
-});
+// Binding the routes to app
+require('./routes/auth_routes')(app);
 
 const PORT = process.env.PORT || 5000;
 
