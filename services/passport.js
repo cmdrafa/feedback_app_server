@@ -33,18 +33,18 @@ passport.use(new GoogleStrategy(
         callbackURL: '/auth/google/callback',
         proxy: true
     },
-    (acessToken, refreshToken, profile, done) => {
-        User.findOne({ googleId: profile.id })
-            .then((existingUser) => {
-                if (existingUser) {
-                    // User exists, call done()
-                    done(null, existingUser);
-                } else {
-                    // User does not exist, create the model, save, and once saved call done();
-                    new User({ googleId: profile.id })
-                        .save()
-                        .then((user) => done(null, user));
-                }
-            });
-    })
-);
+    async (acessToken, refreshToken, profile, done) => {
+        const existingUser = await User.findOne({ googleId: profile.id });
+        
+        if (existingUser) {
+            // User exists, call done()
+            done(null, existingUser);
+        } else {
+            // User does not exist, create the model, save, and once saved call done();
+            const user = await new User({ 
+                googleId: profile.id,
+                displayName: profile.displayName
+             }).save()
+            done(null, user);
+        }
+    }));
