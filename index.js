@@ -37,6 +37,19 @@ app.use(passport.session());
 require('./routes/auth_routes')(app);
 require('./routes/billing_routes')(app);
 
+// Commanding express to serve production assets, including the react files and react routes
+if (process.env.NODE_ENV === 'production') {
+    // First check if there is a folder/ file meeting the req requirements
+    app.use(express.static('client/build'));
+    console.log('Inside it');
+
+    // If everything goes wrong, just serve them index.html
+    const path = require('path');
+    app.get('*', (req, res) => {
+        res.sendFile(path.resolve(__dirname, 'client', 'build', 'index.html'));
+    });
+}
+
 // Define PORT and open the node server
 const PORT = process.env.PORT || 5000;
 app.listen(PORT, () => {
