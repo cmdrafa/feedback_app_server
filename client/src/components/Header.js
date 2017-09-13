@@ -37,7 +37,7 @@ class Header extends Component {
                         <i className="material-icons">email</i>
                         Emaily
                         </Link>
-                    <a className="button-collapse"><i className="material-icons">menu</i></a>
+                    <a className="button-collapse" onClick={this.sideNav()}><i className="material-icons">menu</i></a>
                     <ul className="right hide-on-med-and-down">
                         {this.renderContent()}
                     </ul>
