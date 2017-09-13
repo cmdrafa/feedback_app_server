@@ -2,21 +2,11 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { BrowserRouter, Route } from 'react-router-dom';
 
+import Dashboard from './Dashboard';
 import Header from './Header';
 import Landing from './Landing';
+import SurveyNew from './surveys/SurveyNew';
 import * as actions from '../actions/';
-
-const Dashboard = () => {
-    return (
-        <h2> Dashboard </h2>
-    );
-};
-
-const SurveyNew = () => {
-    return (
-        <h2> SurveyNew </h2>
-    );
-};
 
 
 class App extends Component {
@@ -39,7 +29,5 @@ class App extends Component {
         );
     }
 }
-
-
 
 export default connect(null, actions)(App);

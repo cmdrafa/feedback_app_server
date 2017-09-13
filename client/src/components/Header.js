@@ -17,13 +17,14 @@ class Header extends Component {
             default:
                 return [
                     <li key="payments"> <Payments /></li>,
-                    <li key="credits" style={{margin: '0 10px'}}>  
+                    <li key="credits" style={{ margin: '0 10px' }}>
                         Credits: {this.props.auth.credits}
                     </li>,
                     <li key="logout"><a href="/api/logout">Logout</a></li>
                 ];
         }
     }
+    
 
     render() {
         return (
@@ -31,15 +32,21 @@ class Header extends Component {
                 <div className="nav-wrapper">
                     <Link
                         to={this.props.auth ? '/surveys' : '/'}
-                        className="left brand-logo"
+                        className="brand-logo"
                     >
+                        <i className="material-icons">email</i>
                         Emaily
                         </Link>
-                    <ul className="right">
+                    <a className="button-collapse"><i className="material-icons">menu</i></a>
+                    <ul className="right hide-on-med-and-down">
+                        {this.renderContent()}
+                    </ul>
+                    <ul className="side-nav">
                         {this.renderContent()}
                     </ul>
                 </div>
             </nav>
+            
         );
     }
 }

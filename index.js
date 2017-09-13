@@ -8,6 +8,7 @@ const bodyParser = require('body-parser');
 
 // Required services, confs and models
 require('./models/user'); // Gotta load it first because passport service gotta know about its existence beforehand
+require('./models/survey'); // Gotta load it first because passport service gotta know about its existence beforehand
 require('./services/passport');
 const keys = require('./config/keys');
 
@@ -36,6 +37,7 @@ app.use(passport.session());
 // Binding the routes to express_app
 require('./routes/auth_routes')(app);
 require('./routes/billing_routes')(app);
+require('./routes/survey_routes')(app);
 
 // Commanding express to serve production assets, including the react files and react routes
 if (process.env.NODE_ENV === 'production') {
@@ -53,5 +55,5 @@ if (process.env.NODE_ENV === 'production') {
 // Define PORT and open the node server
 const PORT = process.env.PORT || 5000;
 app.listen(PORT, () => {
-    console.log('Authentication/Billing emaily-server running on port', PORT);
+    console.log('Authentication/Billing/Survey EMAILY-server running on port', PORT);
 });
